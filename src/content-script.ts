@@ -47,20 +47,30 @@ function setupProgressBar(): void {
 }
 
 function observeDOM(): void {
-  const observer = new MutationObserver((_mutations, obs) => {
-    const tweetBoxContainer: HTMLElement | null = document.querySelector(
-      TEXTAREA_SELECTOR,
-    );
+  const observer = new MutationObserver((mutations, _obs) => {
+    mutations.forEach((mutation) => {
+      if (mutation.type === "childList") {
+        const tweetBoxContainer: HTMLElement | null = document.querySelector(
+          TEXTAREA_SELECTOR,
+        );
 
-    if (tweetBoxContainer) {
-      insertProgressBar(tweetBoxContainer);
-      obs.disconnect();
-    }
+        // check if tweet box exists
+        if (
+          tweetBoxContainer && !document.getElementById("progressBarContainer")
+        ) {
+          insertProgressBar(tweetBoxContainer);
+        } else if (!tweetBoxContainer && isCountdownStarted) {
+          // if tweet box is removed, stop countdown
+          stopCountdown();
+        }
+      }
+    });
   });
 
   observer.observe(document.body, {
     childList: true,
     subtree: true,
+    attributes: false,
   });
 }
 
@@ -114,6 +124,23 @@ function startCountdown(progressBar: HTMLElement): void {
     progressBar.style.transition = `width ${RESET_TRANSITION_DURATION} linear`;
     isCountdownStarted = false;
   }, TIMER_DURATION);
+}
+
+function stopCountdown(): void {
+  const progressBar: HTMLElement | null = document.getElementById(
+    "progressBar",
+  );
+
+  if (progressBar) {
+    progressBar.style.width = "0%";
+    progressBar.style.transition = `width ${RESET_TRANSITION_DURATION} linear`;
+  }
+
+  if (countdownTimer) {
+    clearTimeout(countdownTimer);
+  }
+
+  isCountdownStarted = false;
 }
 
 observeDOM();
