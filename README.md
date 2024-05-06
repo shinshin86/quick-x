@@ -1,6 +1,6 @@
 # Quick X
 
-![logo image](./logo/logo.png)
+![logo image](./logo/logo.jpeg)
 
 This is a Chrome extension for [X](https://twitter.com).
 
