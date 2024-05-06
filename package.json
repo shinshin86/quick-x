@@ -1,0 +1,22 @@
+{
+  "name": "quick-x",
+  "private": true,
+  "version": "0.0.1",
+  "description": "You only have 60 seconds to post on X after you start typing. Quick X helps you keep track of time and alerts you if you haven't posted within those 60 seconds.",
+  "type": "module",
+  "author": "shinshin86 <shinshin86npm@gmail.com> (https://github.com/shinshin86)",
+  "license": "MIT",
+  "scripts": {
+    "dev": "vite",
+    "build": "npm run clean && tsc && vite build",
+    "preview": "vite preview",
+    "fmt": "deno fmt",
+    "clean": "rm -rf ./dist"
+  },
+  "devDependencies": {
+    "@crxjs/vite-plugin": "^1.0.14",
+    "@types/chrome": "^0.0.203",
+    "typescript": "^4.9.3",
+    "vite": "^2.9.0"
+  }
+}

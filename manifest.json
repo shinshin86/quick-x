@@ -1,0 +1,22 @@
+{
+  "name": "Quick X",
+  "description": "You only have 60 seconds to post on X after you start typing. Quick X helps you keep track of time and alerts you if you haven't posted within those 60 seconds.",
+  "version": "0.0.1",
+  "manifest_version": 3,
+  "content_scripts": [
+    {
+      "matches": [
+        "https://twitter.com/*"
+      ],
+      "js": ["src/content-script.ts"],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "icons": {
+    "16": "icon16.png",
+    "32": "icon32.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  }
+}
