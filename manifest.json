@@ -1,6 +1,6 @@
 {
   "name": "Quick X",
-  "description": "You only have 60 seconds to post on X after you start typing. Quick X helps you keep track of time and alerts you if you haven't posted within those 60 seconds.",
+  "description": "If you don't post within 60 seconds after starting to type on X (formerly Twitter), you will receive an alert.",
   "version": "0.0.1",
   "manifest_version": 3,
   "content_scripts": [
