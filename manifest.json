@@ -1,7 +1,7 @@
 {
   "name": "Quick X",
   "description": "If you don't post within 60 seconds after starting to type on X (formerly Twitter), you will receive an alert.",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "manifest_version": 3,
   "content_scripts": [
     {
