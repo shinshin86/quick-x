@@ -1,4 +1,4 @@
-// selectors
+// selectors: 1
 const TEXTAREA_DATA_TESTID = "tweetTextarea_0RichTextInputContainer";
 const POST_BUTTON_DATA_TAESTID = "tweetButtonInline";
 const TEXTAREA_SELECTOR = `[data-testid="${TEXTAREA_DATA_TESTID}"]`;
@@ -13,9 +13,9 @@ const RESET_TRANSITION_DURATION = "1s";
 let isCountdownStarted = false;
 let countdownTimer: number | null = null;
 
-function setupEventListeners(): void {
+function setupEventListeners(postButtonSelector: string): void {
   const postButton: HTMLElement | null = document.querySelector(
-    POST_BUTTON_SELECTOR,
+    postButtonSelector,
   );
 
   if (postButton) {
@@ -34,9 +34,9 @@ function setupEventListeners(): void {
   }
 }
 
-function setupProgressBar(): void {
+function setupProgressBar(textareaSelector: string): void {
   const tweetBoxContainer: HTMLElement | null = document.querySelector(
-    TEXTAREA_SELECTOR,
+    textareaSelector,
   );
 
   if (tweetBoxContainer) {
@@ -44,20 +44,23 @@ function setupProgressBar(): void {
   }
 }
 
-function observeDOM(): void {
+function observeDOM(
+  textareaSelector: string,
+  postButtonSelector: string,
+): void {
   const observer = new MutationObserver((mutations, _obs) => {
     mutations.forEach((mutation) => {
       if (mutation.type === "childList") {
         const tweetBoxContainer: HTMLElement | null = document.querySelector(
-          TEXTAREA_SELECTOR,
+          textareaSelector,
         );
 
         // check if tweet box exists
         if (
           tweetBoxContainer && !document.getElementById("progressBarContainer")
         ) {
-          insertProgressBar(tweetBoxContainer);
-          setupEventListeners();
+          setupProgressBar(textareaSelector);
+          setupEventListeners(postButtonSelector);
         } else if (!tweetBoxContainer && isCountdownStarted) {
           // if tweet box is removed, stop countdown
           stopCountdown();
@@ -145,4 +148,4 @@ function stopCountdown(): void {
   isCountdownStarted = false;
 }
 
-observeDOM();
+observeDOM(TEXTAREA_SELECTOR, POST_BUTTON_SELECTOR);
