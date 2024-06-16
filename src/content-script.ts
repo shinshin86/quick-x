@@ -28,9 +28,7 @@ function setupEventListeners(): void {
         progressBar.style.width = "0%";
         isCountdownStarted = false;
 
-        if (countdownTimer) {
-          clearTimeout(countdownTimer);
-        }
+        stopCountdown();
       }
     });
   }
@@ -59,6 +57,7 @@ function observeDOM(): void {
           tweetBoxContainer && !document.getElementById("progressBarContainer")
         ) {
           insertProgressBar(tweetBoxContainer);
+          setupEventListeners();
         } else if (!tweetBoxContainer && isCountdownStarted) {
           // if tweet box is removed, stop countdown
           stopCountdown();
@@ -83,7 +82,7 @@ function insertProgressBar(tweetBoxContainer: HTMLElement): void {
   progressBarContainer.style.borderRadius = "5px";
   progressBarContainer.style.overflow = "hidden";
   progressBarContainer.style.zIndex = "1000";
-  progressBarContainer.style.pointerEvents = "absolute";
+  progressBarContainer.style.pointerEvents = "none";
   progressBarContainer.style.top = "-3px";
 
   const progressBar: HTMLElement = document.createElement("div");
@@ -112,6 +111,8 @@ function insertProgressBar(tweetBoxContainer: HTMLElement): void {
       }
     },
   );
+
+  tweetBoxContainer.addEventListener("blur", stopCountdown);
 }
 
 function startCountdown(progressBar: HTMLElement): void {
@@ -138,6 +139,7 @@ function stopCountdown(): void {
 
   if (countdownTimer) {
     clearTimeout(countdownTimer);
+    countdownTimer = null;
   }
 
   isCountdownStarted = false;
