@@ -1,8 +1,17 @@
 // selectors: 1
 const TEXTAREA_DATA_TESTID = "tweetTextarea_0RichTextInputContainer";
 const POST_BUTTON_DATA_TAESTID = "tweetButtonInline";
-const TEXTAREA_SELECTOR = `[data-testid="${TEXTAREA_DATA_TESTID}"]`;
-const POST_BUTTON_SELECTOR = `[data-testid="${POST_BUTTON_DATA_TAESTID}"]`;
+
+// selectors: 2
+const TEXTAREA_DATA_TESTID_2 = "tweetTextarea_0";
+const POST_BUTTON_DATA_TAESTID_2 = "tweetButton";
+
+// selectors: side post button
+const POST_BUTTON_DATA_TAESTID_SIDE = "SideNav_NewTweet_Button";
+
+function getTweetSelector(testid: string): string {
+  return `[data-testid="${testid}"]`;
+}
 
 // duration
 const DURATION_COUNT = 60;
@@ -148,4 +157,18 @@ function stopCountdown(): void {
   isCountdownStarted = false;
 }
 
-observeDOM(TEXTAREA_SELECTOR, POST_BUTTON_SELECTOR);
+observeDOM(
+  getTweetSelector(TEXTAREA_DATA_TESTID),
+  getTweetSelector(POST_BUTTON_DATA_TAESTID),
+);
+
+// side post button
+const sidePostButton: HTMLElement | null = document.querySelector(
+  getTweetSelector(POST_BUTTON_DATA_TAESTID_SIDE),
+);
+sidePostButton?.addEventListener("click", function () {
+  observeDOM(
+    getTweetSelector(TEXTAREA_DATA_TESTID_2),
+    getTweetSelector(POST_BUTTON_DATA_TAESTID_2),
+  );
+});
