@@ -1,7 +1,7 @@
 {
   "name": "quick-x",
   "private": true,
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "You only have 60 seconds to post on X after you start typing. Quick X helps you keep track of time and alerts you if you haven't posted within those 60 seconds.",
   "type": "module",
   "author": "shinshin86 <shinshin86npm@gmail.com> (https://github.com/shinshin86)",
